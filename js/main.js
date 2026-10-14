@@ -45,6 +45,7 @@ function getInfo(event) {
     const phone = phoneInput.value.trim();
 
     validateForm(name, email, phone);
+    createStudentCard(name, email, phone);
 }
 
 function validateForm(name,email,phone) {
@@ -93,12 +94,28 @@ function displayErrors() {
 /**
  * Skapar ett studentkort och visar det på sidan.
  */
-function createStudentCard() {
+function createStudentCard(name, email, phone) {
     // Hämta information från formuläret
+
+    const font = fontSelect.value; // Hämta valt typsnitt
 
     // Uppdatera studentkortet
 
-    // Lägg till studentkortet i historiken
+    previewFullname.textContent = name; // ändra förhandsvisning av namn
+    previewEmail.textContent = email; // Ändra förhandsvisning av e-post
+    previewPhone.textContent = phone; // Ändra förhandsvisning av telefonnummer
+    previewFullname.style.fontFamily = font; // Ändra typsnitt för namn
+
+    // Skapa ett objekt som representerar studentkortet
+
+    const studentCard ={        
+        name: name,
+        email: email,
+        phone: phone,
+        font: font
+    }
+     // Lägg till studentkortet i historiken
+     history.push(studentCard);
 
     // Spara och uppdatera historiken
 }
