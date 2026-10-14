@@ -62,9 +62,8 @@ function validateForm(name,email,phone) {
     if (phone===""){
         errors.push("Du måste ange ett telefonnummer.");
     }
-    console.log(errors);
-
-     // Visa eventuella felmeddelanden på sidan
+    
+    displayErrors() // Anropa displayErrors för att visa eventuella felmeddelanden
 
     // Returnera resultatet (true eller false) av valideringen
 }
@@ -74,9 +73,20 @@ function validateForm(name,email,phone) {
  * Visar felmeddelanden på sidan.
  */
 function displayErrors() {
-    // Rensa tidigare felmeddelanden
+    
+   errorList.innerHTML = ""; // Rensa tidigare felmeddelanden
 
-    // Skriv ut aktuella felmeddelanden till DOM
+  // Skriv ut aktuella felmeddelanden till DOM
+  if (errors.length > 0) {
+    for (let i = 0; i < errors.length; i++) {  // Loopa igenom errors-arrayen
+
+      const liElement = document.createElement("li"); // Skapa ett li-element för varje felmeddelande
+
+      liElement.textContent = errors[i]; // Sätt textinnehållet till felmeddelandet
+
+      errorList.appendChild(liElement); // Lägg till li-elementet i errorList
+    }
+  }
 }
 
 
