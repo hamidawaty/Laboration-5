@@ -187,8 +187,16 @@ function renderHistory() {
  * Rensar formulär, aktuellt studentkort och felmeddelanden.
  */
 function clearForm() {
+
   // Återställ formulär och studentkort
+  form.reset();
+
+    previewFullname.textContent = "";
+    previewEmail.textContent = "";
+    previewPhone.textContent = "";
   // Rensa eventuella felmeddelanden
+   errors = [];
+    displayErrors();
 }
 
 /**
@@ -206,6 +214,7 @@ function deleteHistory() {
 // - skapa studentkort om valideringen lyckas
 
 // När användaren klickar på "Rensa"
+clearButton.addEventListener("click", clearForm);
 
 // När användaren klickar på "Radera historik"
 
