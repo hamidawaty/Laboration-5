@@ -113,7 +113,10 @@ function createStudentCard(name, email, phone) {
     previewFullname.textContent = name; // ändra förhandsvisning av namn
     previewEmail.textContent = email; // Ändra förhandsvisning av e-post
     previewPhone.textContent = phone; // Ändra förhandsvisning av telefonnummer
+    
     previewFullname.style.fontFamily = font; // Ändra typsnitt för namn
+    previewEmail.style.fontFamily = font; // Ändra typsnitt för e-post
+    previewPhone.style.fontFamily = font; // Ändra typsnitt för telefonnummer
 
     // Skapa ett objekt som representerar studentkortet
 
