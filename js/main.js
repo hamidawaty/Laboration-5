@@ -32,7 +32,7 @@ let history = [];
  * Validerar formulärets inmatning.
  * @returns {boolean}
  */
-
+renderHistory()
 form.addEventListener("submit", getInfo) // När formuläret skickas, anropa getInfo
 
 function getInfo(event) {
@@ -113,7 +113,7 @@ function createStudentCard(name, email, phone) {
     previewFullname.textContent = name; // ändra förhandsvisning av namn
     previewEmail.textContent = email; // Ändra förhandsvisning av e-post
     previewPhone.textContent = phone; // Ändra förhandsvisning av telefonnummer
-    
+
     previewFullname.style.fontFamily = font; // Ändra typsnitt för namn
     previewEmail.style.fontFamily = font; // Ändra typsnitt för e-post
     previewPhone.style.fontFamily = font; // Ändra typsnitt för telefonnummer
@@ -141,6 +141,7 @@ function saveHistory() {
     // Spara history i localStorage
     const studentJSON = JSON.stringify(history);
     localStorage.setItem("studentHistory", studentJSON);
+    loadHistory()
 }
 
 
@@ -149,8 +150,21 @@ function saveHistory() {
  */
 function loadHistory() {
     // Hämta eventuell sparad historik
+    const savedHistory = localStorage.getItem("studentHistory");
 
-    // Uppdatera history
+    // Ändra JSON-strängen till en array
+    const history = JSON.parse(savedHistory);
+
+// Om det inte finns någon sparad historik, skapa en tom array
+    if(history === null){
+        history = [];  
+    }
+    // Om historiken är tom, returnera och visa inget
+    if (history.length === 0) {
+        return; 
+    }
+    renderHistory();
+    
 }
 
 
