@@ -32,19 +32,34 @@ let history = [];
  * Validerar formulärets inmatning.
  * @returns {boolean}
  */
-function validateForm() {
+
+form.addEventListener("submit", getInfo) // När formuläret skickas, anropa getInfo
+
+function getInfo(event) {
+    event.preventDefault();
+
+    // Hämta värden från formuläret och trimma bort eventuella blanksteg i början och slutet
+    
+    const name = fullnameInput.value.trim();
+    const email = emailInput.value.trim();
+    const phone = phoneInput.value.trim();
+
+    validateForm(name, email, phone);
+}
+
+function validateForm(name,email,phone) {
     errors = []; // Rensa tidigare felmeddelanden
 
     /* Kontrollera formulärets obligatoriska fält och lägg till 
      eventuella felmeddelanden i errors-arrayen*/
 
-    if (fullnameInput.value.trim() === "") { 
+    if (name === "") { 
         errors.push("Du måste ange ett namn.");
     }
-    if (emailInput.value.trim()===""){
+    if (email ===""){
         errors.push("Du måste ange en e-postadress.");
     }
-    if (phoneInput.value.trim()===""){
+    if (phone===""){
         errors.push("Du måste ange ett telefonnummer.");
     }
     console.log(errors);
