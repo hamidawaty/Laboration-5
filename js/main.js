@@ -44,29 +44,38 @@ function getInfo(event) {
     const email = emailInput.value.trim();
     const phone = phoneInput.value.trim();
 
-    validateForm(name, email, phone);
+    if (!validateForm(name, email, phone)) {
+        displayErrors(); 
+    }
+    else {
+        saveHistory();
+    }
     createStudentCard(name, email, phone);
 }
 
 function validateForm(name,email,phone) {
     errors = []; // Rensa tidigare felmeddelanden
 
+    let validate=true; // Variabel som används för att avgöra om valideringen lyckas
     /* Kontrollera formulärets obligatoriska fält och lägg till 
      eventuella felmeddelanden i errors-arrayen*/
 
     if (name === "") { 
         errors.push("Du måste ange ett namn.");
+        validate=false; // Om namnet är tomt, sätt validate till false
     }
     if (email ===""){
         errors.push("Du måste ange en e-postadress.");
+        validate=false; // Sätt validate till false
     }
     if (phone===""){
         errors.push("Du måste ange ett telefonnummer.");
+        validate=false; // Sätt validate till false
     }
-    
+    return validate; // Returnera resultatet (true eller false) av valideringen
+
     displayErrors() // Anropa displayErrors för att visa eventuella felmeddelanden
 
-    // Returnera resultatet (true eller false) av valideringen
 }
 
 
@@ -118,6 +127,7 @@ function createStudentCard(name, email, phone) {
      history.push(studentCard);
 
     // Spara och uppdatera historiken
+    saveHistory();
 }
 
 
@@ -126,6 +136,8 @@ function createStudentCard(name, email, phone) {
  */
 function saveHistory() {
     // Spara history i localStorage
+    const studentJSON = JSON.stringify(history);
+    localStorage.setItem("studentHistory", studentJSON);
 }
 
 
