@@ -33,9 +33,23 @@ let history = [];
  * @returns {boolean}
  */
 function validateForm() {
-    // Kontrollera formulärets obligatoriska fält
+    errors = []; // Rensa tidigare felmeddelanden
 
-    // Visa eventuella felmeddelanden
+    /* Kontrollera formulärets obligatoriska fält och lägg till 
+     eventuella felmeddelanden i errors-arrayen*/
+
+    if (fullnameInput.value.trim() === "") { 
+        errors.push("Du måste ange ett namn.");
+    }
+    if (emailInput.value.trim()===""){
+        errors.push("Du måste ange en e-postadress.");
+    }
+    if (phoneInput.value.trim()===""){
+        errors.push("Du måste ange ett telefonnummer.");
+    }
+    console.log(errors);
+
+     // Visa eventuella felmeddelanden på sidan
 
     // Returnera resultatet (true eller false) av valideringen
 }
