@@ -50,9 +50,10 @@ function getInfo(event) {
   if (!validateForm(name, email, phone)) {
     displayErrors();
   } else {
-    saveHistory();
+    displayErrors();
+     createStudentCard(name, email, phone);
   }
-  createStudentCard(name, email, phone);
+ 
 }
 
 function validateForm(name, email, phone) {
