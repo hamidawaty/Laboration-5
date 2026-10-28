@@ -31,6 +31,9 @@ let history = [];
  * Validerar formulärets inmatning.
  * @returns {boolean}
  */
+
+ const font = fontSelect.value;
+
 renderHistory();
 form.addEventListener("submit", getInfo); // När formuläret skickas, anropa getInfo
 
@@ -42,6 +45,7 @@ function getInfo(event) {
   const name = fullnameInput.value.trim();
   const email = emailInput.value.trim();
   const phone = phoneInput.value.trim();
+ 
 
   if (!validateForm(name, email, phone)) {
     displayErrors();
@@ -125,23 +129,23 @@ function createStudentCard(name, email, phone) {
   history.push(studentCard);
 
   // Spara och uppdatera historiken
-  saveHistory();
+  saveHistory(font);
 }
 
 /**
  * Sparar historiken i localStorage.
  */
-function saveHistory() {
+function saveHistory(font) {
   // Spara history i localStorage
   const studentJSON = JSON.stringify(history);
   localStorage.setItem("studentHistory", studentJSON);
-  loadHistory();
+  loadHistory(font);
 }
 
 /**
  * Läser in tidigare historik från localStorage.
  */
-function loadHistory() {
+function loadHistory(font) {
   // Hämta eventuell sparad historik
   const savedHistory = localStorage.getItem("studentHistory");
 
@@ -156,13 +160,13 @@ function loadHistory() {
   if (history.length === 0) {
     return;
   }
-  renderHistory();
+  renderHistory(font);
 }
 
 /**
  * Visar historiken på sidan.
  */
-function renderHistory() {
+function renderHistory(font) {
     // Rensa tidigare visad historik
   historySection.innerHTML = "";
 
@@ -175,6 +179,11 @@ function renderHistory() {
                     <strong>E-post:</strong> ${history[i].email} <br> 
                      <strong>Telefon:</strong> ${history[i].phone} <br>    
                     <strong>Typsnitt:</strong> ${history[i].font}`;
+    
+    pEl.style.fontFamily = history[i].font; // Ändra typsnitt för p-elementet
+    historySection.style.border = "1px solid #a5a5a5 "; // Lägg till en svart kantlinje runt historiksektionen
+    historySection.style.padding = "5px 15px"; // Lägg till lite padding runt historiksektionen 
+    historySection.style.borderRadius = "5px"; // Lägg till rundade hörn på historiksektionen
 
     historySection.appendChild(pEl); // Lägg till p-elementet i historySection
   }
@@ -203,8 +212,13 @@ function clearForm() {
  * Raderar hela historiken.
  */
 function deleteHistory() {
+
   // Radera sparad historik
+localStorage.removeItem("studentHistory");
+
   // Uppdatera history och visningen på sidan
+    history = [];
+    renderHistory(font);
 }
 
 // Eventlyssnare
@@ -217,6 +231,8 @@ function deleteHistory() {
 clearButton.addEventListener("click", clearForm);
 
 // När användaren klickar på "Radera historik"
+deleteHistoryButton.addEventListener("click", deleteHistory);
 
 // När sidan laddas:
 // - läs in och visa eventuell tidigare historik
+window.addEventListener("load", loadHistory);
