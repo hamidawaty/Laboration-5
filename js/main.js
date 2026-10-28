@@ -77,7 +77,6 @@ function validateForm(name, email, phone) {
   }
   return validate; // Returnera resultatet (true eller false) av valideringen
 
-  displayErrors(); // Anropa displayErrors för att visa eventuella felmeddelanden
 }
 
 /**
@@ -140,7 +139,7 @@ function saveHistory(font) {
   // Spara history i localStorage
   const studentJSON = JSON.stringify(history);
   localStorage.setItem("studentHistory", studentJSON);
-  loadHistory(font);
+  renderHistory(font);
 }
 
 /**
